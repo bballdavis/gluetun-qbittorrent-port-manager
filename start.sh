@@ -47,7 +47,7 @@ while true; do
     sleep 10
     continue
   fi
-  echo "Port retreived from Gluetun: $PORT_FORWARDED"
+  #echo "Port retreived from Gluetun: $PORT_FORWARDED"
   # If the current port is different from the forwarded port, update it
   if [[ "$CURRENT_PORT" != "$PORT_FORWARDED" ]]; then
     update_port "$PORT_FORWARDED"

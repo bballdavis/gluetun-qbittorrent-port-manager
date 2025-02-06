@@ -13,7 +13,7 @@ update_port () {
   # Log in to the qbittorrent web UI and save cookies
   curl -s -c "$COOKIES" --data "username=$QBITTORRENT_USER&password=$QBITTORRENT_PASS" "${HTTP_S}://${QBITTORRENT_SERVER}:${QBITTORRENT_PORT}/api/v2/auth/login" > /dev/null
   if [[ $? -ne 0 ]]; then
-    echo "Login failed."
+    echo "[Error] Login failed."
     return 1
   fi
 
@@ -23,17 +23,17 @@ update_port () {
   CURRENT_PORT=$(curl -s -b $COOKIES ${HTTP_S}://${QBITTORRENT_SERVER}:${QBITTORRENT_PORT}/api/v2/app/preferences | jq -r '.listen_port')
 
   if [ "$CURRENT_PORT" == "$PORT" ]; then
-    echo "Successfully updated qbittorrent to port $PORT"
+    echo "[Info] Successfully updated qbittorrent to port $PORT"
     return 0
   else
-    echo "Failed to update port."
+    echo "[Error] Failed to update port."
     return 1
   fi
 
   # Clean up cookies file
   rm -f "$COOKIES"
 
-  echo "Successfully updated qbittorrent to port $PORT"
+  echo "[Info] Successfully updated qbittorrent to port $PORT"
 }
 
 # Main loop to check the port and update if necessary
@@ -51,6 +51,8 @@ while true; do
   # If the current port is different from the forwarded port, update it
   if [[ "$CURRENT_PORT" != "$PORT_FORWARDED" ]]; then
     update_port "$PORT_FORWARDED"
+  else
+    echo "[Info] Current Gluetun port matches Qbittorrent port."
   fi
 
   # Wait for a specific interval before checking again

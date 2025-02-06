@@ -43,7 +43,7 @@ while true; do
   
   # Check if the fetched port is valid
   if [[ -z "$PORT_FORWARDED" || ! "$PORT_FORWARDED" =~ ^[0-9]+$ ]]; then
-    echo "Failed to retrieve a valid port number."
+    echo "[Error] Failed to retrieve a valid port number, response from Gluetun: " + PORT_FORWARDED
     sleep 10
     continue
   fi
@@ -51,7 +51,6 @@ while true; do
   # If the current port is different from the forwarded port, update it
   if [[ "$CURRENT_PORT" != "$PORT_FORWARDED" ]]; then
     update_port "$PORT_FORWARDED"
-    echo "Updated port to:" + $PORT_FORWARDED
   fi
 
   # Wait for a specific interval before checking again

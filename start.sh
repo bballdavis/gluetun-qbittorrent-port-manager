@@ -39,7 +39,7 @@ update_port () {
 # Main loop to check the port and update if necessary
 while true; do
   # Fetch the forwarded port
-  PORT_FORWARDED=$(curl -H "X-API-Key: ${GLUETUN_APIKEY}" ${HTTP_S}://${GLUETUN_HOST}:${GLUETUN_PORT}/v1/openvpn/portforwarded | awk -F: '{gsub(/[^0-9]/,"",$2); print $2}')
+  PORT_FORWARDED=$(curl -s -H "X-API-Key: ${GLUETUN_APIKEY}" ${HTTP_S}://${GLUETUN_HOST}:${GLUETUN_PORT}/v1/openvpn/portforwarded | awk -F: '{gsub(/[^0-9]/,"",$2); print $2}')
   
   # Check if the fetched port is valid
   if [[ -z "$PORT_FORWARDED" || ! "$PORT_FORWARDED" =~ ^[0-9]+$ ]]; then

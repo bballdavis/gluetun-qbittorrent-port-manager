@@ -43,7 +43,7 @@ while true; do
   
   # Check if the fetched port is valid
   if [[ -z "$PORT_FORWARDED" || ! "$PORT_FORWARDED" =~ ^[0-9]+$ ]]; then
-    echo "[Error] Failed to retrieve a valid port number, response from Gluetun: " + PORT_FORWARDED
+    echo "[Error] Failed to retrieve a valid port number, response from Gluetun: $PORT_FORWARDED"
     sleep 10
     continue
   fi

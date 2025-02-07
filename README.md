@@ -6,7 +6,7 @@ This is my fork of [patrickaclark's](https://github.com/patrickaclark) (which is
 
 [Gluetun](https://github.com/qdm12/gluetun/) has the ability to forward ports for supported VPN providers, but qbittorrent does not have the ability to update its listening port dynamically.
 
-With Gluetun slow depricating access to both the file method (snoringdragon) and unauthorized API access, I modified the script by [patrickaclark](https://github.com/patrickaclark)  to reach out to the [Gluetun](https://github.com/qdm12/gluetun/) control server API with an Api key for authorization and updates the qbittorrent's listening port based on the response.
+With Gluetun slow depricating access to both the file method (snoringdragon) and unauthorized API access, I modified the script by [patrickaclark](https://github.com/patrickaclark)  to reach out to the [Gluetun](https://github.com/qdm12/gluetun/) control server API with an Api key for authorization and updates the qbittorrent's listening port based on the response.  Once the port is updated, it then reaches out and has QBitorrent reannounce all torrents to the trackers.
 
 ## Setup
 First, ensure you are able to successfully connect qbittorrent to the forwarded port manually (can be seen by a green globe at the bottom of the WebUI).

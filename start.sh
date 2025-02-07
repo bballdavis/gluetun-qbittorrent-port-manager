@@ -23,7 +23,7 @@ update_port () {
   CURRENT_PORT=$(curl -s -b $COOKIES ${HTTP_S}://${QBITTORRENT_SERVER}:${QBITTORRENT_PORT}/api/v2/app/preferences | jq -r '.listen_port')
 
   if [ "$CURRENT_PORT" == "$PORT" ]; then
-    echo "[Info] Successfully updated qbittorrent to port $PORT"
+    echo "[Info]✅ Successfully updated qbittorrent to port $PORT"
     reannounce_all "$COOKIES"
     return 0
   else

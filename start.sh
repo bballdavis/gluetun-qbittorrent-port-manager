@@ -50,7 +50,7 @@ reannounce_all () {
   echo "[Info]📂 Found $(echo "$HASHES" | wc -l) torrents. Reannouncing..."
 
   # Reannounce each torrent
-  curl -X POST "${HTTP_S}://${QBITTORRENT_SERVER}:${QBITTORRENT_PORT}/api/v2/torrents/reannounce" \
+  curl -X POST -s "${HTTP_S}://${QBITTORRENT_SERVER}:${QBITTORRENT_PORT}/api/v2/torrents/reannounce" \
       --data "hashes=all" \
       -b "$COOKIES"
 

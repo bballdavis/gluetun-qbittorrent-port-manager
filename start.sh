@@ -39,22 +39,22 @@ update_port () {
 
 reannounce_all () {
 # Get list of all torrent hashes
-  TORRENTS_JSON=$(curl -s -b "$COOKIEs" "${HTTP_S}://${QBITTORRENT_SERVER}:${QBITTORRENT_PORT}/api/v2/torrents/info")
+  TORRENTS_JSON=$(curl -s -b "$COOKIES" "${HTTP_S}://${QBITTORRENT_SERVER}:${QBITTORRENT_PORT}/api/v2/torrents/info")
   HASHES=$(echo "$TORRENTS_JSON" | jq -r '.[].hash')
 
   if [[ -z "$HASHES" ]]; then
-      echo "❌ No torrents found!"
+      echo "[Error]❌ No torrents found!"
       exit 1
   fi
 
-  echo "📂 Found $(echo "$HASHES" | wc -l) torrents. Reannouncing..."
+  echo "[Info]📂 Found $(echo "$HASHES" | wc -l) torrents. Reannouncing..."
 
   # Reannounce each torrent
   curl -X POST "${HTTP_S}://${QBITTORRENT_SERVER}:${QBITTORRENT_PORT}/api/v2/torrents/reannounce" \
       --data "hashes=all" \
-      -b "$COOKIE_JAR"
+      -b "$COOKIES"
 
-echo "✅ All torrents reannounced!"
+  echo "[Info]✅ All torrents reannounced!"
 }
 
 # Main loop to check the port and update if necessary
